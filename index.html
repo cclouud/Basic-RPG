@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medac Adventure</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+    <div id="particles"></div>
+
+
+    <div class="cent" id="canv">
+        <video width="100%" height="100%" autoplay muted>
+            <source src="img/animation.mp4" type="video/mp4">
+        </video>
+
+
+
+        <img src="/img/Pj2.gif" id="mainC" alt="">
+        <img src="/img/Ene2.gif" id="enem" alt="">
+
+        <p id="text"></p>
+
+
+        <div class="texto-encima">
+            <input type="text" id="nombre" placeholder="Escribe tu nombre aquí"> <br> <br> <br>
+
+            <button id="guardNom">Enviar Nombre</button>
+        </div>
+
+        <div id="estadisticas" class="dive">
+            <p id="textes">
+
+            </p>
+        </div>
+        <div class="vidatq" id="divva">  
+                <button id="mVida" type="" class="">Vida +20</button>
+                 <button id="mAtq" type="" class="">Ataque +10</button>
+                </div>
+
+
+        <button id="genshinNever" type="" onclick="desaparecer(), inicio()">Skip</button>
+    </div>
+    <div class="cent2">
+        <div class="but">
+            <div class="but">
+                <button id="ene">Buscar Enemigo</button>
+            </div>
+            <div class="but">
+                <button id="men">Menu</button>
+
+            </div>
+
+            <div class="but">
+                <button id="tie">Entrar en la Tienda</button>
+
+            </div>
+
+
+        </div>
+        <div class="but2">
+
+            <div class="but">
+                <button class="sa" id="sa">Salir</button>
+
+            </div>
+        </div>
+
+    </div>
+    <script type="module" src="./js/Main.js"></script>
+    <script src="./js/particulas.js"></script>
+    <script src="./js/animat.js"></script>
+</body>
+
+</html>
