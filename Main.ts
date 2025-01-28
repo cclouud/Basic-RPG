@@ -14,11 +14,15 @@ const comb = document.getElementById("ene")
 const boton = document.getElementById("guardNom");
 const vid = document.getElementById("mVida")
 const atq = document.getElementById("mAtq")
+const intercomb = document.getElementById("intercomb")
+
 
 //-----------------Funciones de Juego----------------
 
 
 export function crearJugador(): Jugador {
+  console.log("player");
+  
   let nombre = (document.getElementById("nombre") as HTMLInputElement).value;
 
   jugador = new Jugador(nombre, 100, 0, 2);
@@ -245,6 +249,8 @@ export function irATienda() {
   setTimeout(() => {
     fadeOutElement(estadisticas);
     fadeOutElement(imagen);
+    fadeOutElement(intercomb)
+
   }, 500);
 
   const div = document.getElementById("canv");
@@ -290,6 +296,7 @@ export function irAMenu() {
     fadeOutElement(texto);
     fadeOutElement(imagen);
     fadeOutElement(divva);
+    fadeOutElement(intercomb)
   }, 600);
 
   const div = document.getElementById("canv");
@@ -332,9 +339,11 @@ export function irACombate() {
     fadeInBackground(div);
 
     setTimeout(() => {
-      let aleatene = Math.floor(Math.random() * 6) + 1;
+      let aleatene = Math.floor(Math.random() * 5) + 1;
       imagen.src = `/img/Ene${aleatene}.gif`;
       fadeInElement(imagen);
+      fadeInElement(intercomb)
+      enableButton(comb)
 
     }, 200);
   }, 1000);
@@ -412,9 +421,8 @@ function enableButton(button) {
 //-----------------DOM y eventos de click------------------------------
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (boton) {
     boton.addEventListener('click', crearJugador);
-  }
+  
   if (tienda) {
     tienda.addEventListener('click', irATienda);
   }

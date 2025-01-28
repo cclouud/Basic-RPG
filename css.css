@@ -98,7 +98,14 @@ video{
     
 }
 
-
+#combate{
+    position: absolute;
+    z-index: 4;
+    width: 14em;
+    height: 2em;
+    margin-top: 10%;
+    right: 38%;
+}
 
 
 #mainC {
@@ -112,11 +119,63 @@ video{
 #enem {
     position: absolute; 
     margin-top: 8em;
-    left: 45%; 
+    right: 10em; 
     width: auto;
     height: 60%; 
     z-index: 1;
   }
+
+
+
+  #barrap, #barrae {
+    position: absolute;
+    width: 35%;
+    height: 1em;
+    border-radius: 10px;
+    z-index: 5;
+
+}
+
+#barrap {
+    left: 12%;
+}
+
+#barrae {
+    right: 12%;
+}
+
+#barrap p, #barrae p {
+    position: absolute;
+    left: 30%;
+    
+    color: white; 
+    text-align: center;
+}
+
+
+#barrapp {
+    position: absolute;
+    background: red; 
+    width: 35%;
+    height: 1em; 
+    border-radius: 10px;
+    z-index: 5;
+    top: 14%;
+    left: 12%;
+}
+
+#barraen {
+    position: absolute;
+    background: blue; 
+    width: 35%;
+    height: 1em; 
+    border-radius: 10px;
+    z-index: 5;
+    top: 14%;
+    right: 12%;
+}
+
+
 
 
 .cent2{
@@ -175,7 +234,7 @@ button:hover {
     width: 7em;
     height: 2.5em;
     margin: auto;
-    margin-top: 25em;
+    margin-top: 22em;
     margin-bottom: 1em;
     position: absolute;
     z-index: 4;

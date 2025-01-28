@@ -14,6 +14,7 @@ let main = document.getElementById("mainC");
 let dives = document.getElementById("estadisticas");
 let imagen = document.getElementById("enem");
 let divva = document.getElementById("divva");
+let intercomb = document.getElementById("intercomb")
 
 buscar.style.opacity = "0";
 tienda.style.opacity = "0";
@@ -24,12 +25,12 @@ botong.style.display = "none";
 nombre.style.display = "none";
 texto.style.display = "none";
 
+
 main.style.opacity = "0";
 dives.style.opacity = "0";
 imagen.style.opacity = "0";
 divva.style.opacity = "0";
-
-
+intercomb.style.opacity = "0"
 
 //------------------------Funciones Principales-------------------------
 
