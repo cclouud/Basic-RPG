@@ -41,7 +41,7 @@ export function crearJugador() {
         else {
             clearInterval(intervalo);
         }
-    }, 70);
+    }, 40);
     setTimeout(() => {
         fadeOutElement(texto);
         texto.style.display = "none";
@@ -100,6 +100,8 @@ function empezarJuego() {
     });
 }
 function masAtq() {
+    disableButton(atq);
+    disableButton(vid);
     if (jugador.dinero >= 15) {
         jugador.puntos_ataque += 10;
         jugador.dinero -= 15;
@@ -114,8 +116,10 @@ function masAtq() {
             }
             else {
                 clearInterval(intervalo);
+                enableButton(atq);
+                enableButton(vid);
             }
-        }, 70);
+        }, 40);
     }
     else {
         let texto = document.getElementById("text");
@@ -129,11 +133,15 @@ function masAtq() {
             }
             else {
                 clearInterval(intervalo);
+                enableButton(atq);
+                enableButton(vid);
             }
-        }, 70);
+        }, 40);
     }
 }
 function masVida() {
+    disableButton(vid);
+    disableButton(atq);
     if (jugador.dinero >= 15) {
         jugador.puntos_salud += 20;
         jugador.dinero -= 15;
@@ -148,8 +156,10 @@ function masVida() {
             }
             else {
                 clearInterval(intervalo);
+                enableButton(vid);
+                enableButton(atq);
             }
-        }, 70);
+        }, 40);
     }
     else {
         let texto = document.getElementById("text");
@@ -163,13 +173,17 @@ function masVida() {
             }
             else {
                 clearInterval(intervalo);
+                enableButton(vid);
+                enableButton(atq);
             }
-        }, 70);
+        }, 40);
     }
 }
 //-------------------Ir A-------------------------
 export function irATienda() {
     disableButton(tienda);
+    disableButton(atq);
+    disableButton(vid);
     enableButton(comb);
     enableButton(menu);
     let estadisticas = document.getElementById("estadisticas");
@@ -196,12 +210,14 @@ export function irATienda() {
             }
             else {
                 clearInterval(intervalo);
+                enableButton(vid);
+                enableButton(atq);
             }
-        }, 70);
+        }, 50);
     }, 1000);
     setTimeout(() => {
         fadeInElement(divva);
-    }, 2000);
+    }, 3000);
 }
 export function irAMenu() {
     disableButton(menu);

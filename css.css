@@ -128,59 +128,134 @@ video{
 
 }
 
-.but{
+button {
+    width: 15em;
+    height: 4em;
+    border: 2px solid #4a342a; 
+    background-color: #2e2c2a; 
+    color: #d7c6a8; 
+    font-size: 16px;
+    font-family: "Georgia", serif; 
+    letter-spacing: 1px;
+    border-radius: 8px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #3b3836; 
+    color: #fff0d6;
+    transform: scale(1.05); 
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+.sa {
+    width: 40em;
+    height: 4em;
+    margin-top: 1%;
+    border: 2px solid #6b2d2d; 
+    background-color: #3a2929; 
+    color: #d7c6a8;
+    font-size: 16px;
+    font-family: "Georgia", serif;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.sa:hover {
+    background-color: #5a1f1f; 
+    color: #fff0d6; 
+    transform: scale(1.08);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+#genshinNever {
+    width: 7em;
+    height: 2.5em;
+    margin: auto;
+    margin-top: 25em;
+    margin-bottom: 1em;
+    position: absolute;
+    z-index: 4;
+    border: 2px solid #4a342a;
+    background-color: #2e2c2a;
+    color: #d7c6a8;
+    font-size: 14px;
+    font-family: "Georgia", serif;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+#genshinNever:hover {
+    background-color: #3b3836;
+    color: #fff0d6;
+    transform: scale(1.1);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
+}
+
+.but {
     width: 90%;
     margin: auto;
     display: flex;
     justify-content: center;
-    
+    z-index: 3;
 }
 
-.but2{
+.but2 {
     width: 90%;
     height: 4em;
     margin: auto;
     display: flex;
     flex-direction: row;
-    
 }
 
-button{
-    width: 15em;
-    height: 4em;
-    border: 1px solid white;
-    background-color: rgb(107, 134, 185);
-    color: white;
-    font-size: 15px;
-    border-radius: 10px;
-    z-index: 3;
-    transition: 0.5s ease-in-out;
+
+
+#mAtq {
+    width: 7em;
+    height: 3em;
+    border: 2px solid #4a342a; 
+    background-color: #2e2c2a; 
+    color: #d7c6a8; 
+    font-size: 16px;
+    font-family: "Georgia", serif; 
+    letter-spacing: 1px;
+    border-radius: 8px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
 }
 
-button:hover{
-    background-color: cornflowerblue ;
-    width: 16em;
-    height: 4em;
+#mAtq:hover {
+    background-color: #2600ff;
+    color: #fff0d6; 
+    transform: scale(1.05); 
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
 }
 
-.sa{
-    
-    width: 40em;
-    height: 4em;
-    margin-top: 1%;
-    border: 1px solid white;
-    background-color:rgb(238, 92, 92);
-    color: white;
-    font-size: 15px;
-    border-radius: 10px;
-    transition: 0.5s ease-in-out;
+#mVida {
+    width: 7em;
+    height: 3em;
+    border: 2px solid #4a342a;
+    background-color: #2e2c2a;
+    color: #d7c6a8;
+    font-size: 16px;
+    font-family: "Georgia", serif; 
+    letter-spacing: 1px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
 }
 
-.sa:hover{
-    background-color: rgb(255, 0, 0);
-    width: 43em;
-    height: 4em;
+#mVida:hover {
+    background-color: #ff0000; 
+    color: #fff0d6; 
+    transform: scale(1.05);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
 }
+
 
 
 #divva{
@@ -192,38 +267,8 @@ button:hover{
 }
 
 
-#mAtq{
-    width: 40%;
-    height: 3em;
-    background-color: cornflowerblue;
-}
-#mAtq:hover{
-    background-color: rgb(76, 94, 232);
-
-}
-
-#mVida{
-    width: 40%;
-    height: 3em;
-    background-color: cornflowerblue;
-}
-#mVida:hover{
-    background-color: rgb(215, 0, 0);
-
-}
 
 
-
-#genshinNever{
-    width:5em;
-    ;
-    height: 2em;
-    margin:auto;
-    margin-top: 22em;
-    margin-bottom: 1em;
-    position: absolute;
-    z-index: 4;
-}
 
 
 
@@ -233,8 +278,8 @@ button:hover{
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* No afecta los clics */
-    z-index: -1; /* Detrás del contenido */
+    pointer-events: none; 
+    z-index: -1; 
   }
   .particle {
     position: absolute;
@@ -242,8 +287,8 @@ button:hover{
     height: 5px;
     background-color: red;
     border-radius: 50%;
-    animation: float 5s infinite ease-in-out, sparkle 3s infinite ease-in-out; /* Añadimos la animación sparkle */
-    box-shadow: 0 0 10px 2px red; /* Añadir brillo alrededor */
+    animation: float 5s infinite ease-in-out, sparkle 3s infinite ease-in-out; 
+    box-shadow: 0 0 10px 2px rgb(179, 116, 0); 
   }
 
   @keyframes float {

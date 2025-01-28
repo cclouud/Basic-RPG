@@ -59,7 +59,7 @@ export function crearJugador(): Jugador {
     } else {
       clearInterval(intervalo);
     }
-  }, 70);
+  }, 40);
 
 
   setTimeout(() => {
@@ -140,6 +140,8 @@ function empezarJuego() {
 }
 
 function masAtq() {
+  disableButton(atq)
+  disableButton(vid)
   if (jugador.dinero >= 15) { 
     jugador.puntos_ataque += 10;
     jugador.dinero -= 15; 
@@ -155,8 +157,12 @@ function masAtq() {
         indice++;
       } else {
         clearInterval(intervalo);
+          enableButton(atq)
+          enableButton(vid)
+
+
       }
-    }, 70);
+    }, 40);
 
   } else {
     let texto = document.getElementById("text")
@@ -170,13 +176,19 @@ function masAtq() {
         indice++;
       } else {
         clearInterval(intervalo);
+          enableButton(atq)
+          enableButton(vid)
+
+
       }
-    }, 70);
+    }, 40);
 
   }
 }
 
 function masVida(){
+  disableButton(vid)
+  disableButton(atq)
 
   if (jugador.dinero >= 15) { 
     jugador.puntos_salud += 20;
@@ -193,8 +205,10 @@ function masVida(){
         indice++;
       } else {
         clearInterval(intervalo);
+          enableButton(vid)
+          enableButton(atq)
       }
-    }, 70);
+    }, 40);
 
   } else {
     let texto = document.getElementById("text")
@@ -208,8 +222,10 @@ function masVida(){
         indice++;
       } else {
         clearInterval(intervalo);
+        enableButton(vid)
+        enableButton(atq)
       }
-    }, 70);
+    }, 40);
 
   }
 }
@@ -218,6 +234,9 @@ function masVida(){
 
 export function irATienda() {
   disableButton(tienda)
+  disableButton(atq)
+  disableButton(vid)
+
   enableButton(comb)
   enableButton(menu)
   let estadisticas = document.getElementById("estadisticas");
@@ -248,13 +267,15 @@ export function irATienda() {
         indice++;
       } else {
         clearInterval(intervalo);
+        enableButton(vid)
+        enableButton(atq)
       }
-    }, 70);
+    }, 50);
   }, 1000);
 
   setTimeout(() => {
     fadeInElement(divva);
-  }, 2000);
+  }, 3000);
 }
 
 export function irAMenu() {
