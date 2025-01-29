@@ -7,7 +7,7 @@ import { Enemigo } from './Clases.js';
 
 let jugador;
 let enemigo1;
-let contador;
+let contador = 1;
 let imagen = document.getElementById("enem") as HTMLImageElement;
 let divva = document.getElementById("divva")
 const tienda = document.getElementById("tie");
@@ -27,6 +27,7 @@ let textoro = document.getElementById("textoro")
 let perdido = document.getElementById("perdido")
 let main = document.getElementById("mainC");
 let streak = document.getElementById("textcont")
+let ganado = document.getElementById("ganado")
 
 //-----------------Funciones de Juego----------------
 
@@ -108,53 +109,66 @@ export function crearJugador(): Jugador {
 
 }
 
-function mostrarEst(jugador) {
+function empezarComb(enemigo1) {
+  fadeOutElement(combate);
 
-  const textoElemento = document.getElementById("textes");
-
-  if (textoElemento) {
-    textoElemento.innerHTML = `
-      <p><strong>Estadísticas del Jugador</strong></p>
-      <p>Nombre: ${jugador.nombre}</p>
-      <p>Vida: ${jugador.puntos_salud}</p>
-      <p>Ataque: ${jugador.puntos_ataque}</p>
-      <p>Dinero: ${jugador.dinero}</p>
-    `;
+  function actualizarEstadisticas() {
+    nombpp.innerHTML = jugador.nombre + " -- HP: " + jugador.puntos_salud + " -- Atk: " + jugador.puntos_ataque;
+    nomben.innerHTML = enemigo1.nombre + " -- HP: " + enemigo1.puntos_salud + " -- Atk: " + enemigo1.puntos_ataque;
   }
 
+  function turnoCombate() {
+    if (jugador.puntos_salud > 0 && enemigo1.puntos_salud > 0) {
+      enemigo1.puntos_salud -= jugador.puntos_ataque;
+      actualizarEstadisticas();
 
+      if (enemigo1.puntos_salud <= 0) {
+        jugador.dinero += enemigo1.dinero;
+        nomben.innerHTML = enemigo1.nombre + " ha sido derrotado!!";
+        fadeOutElement(imagen);
+        contador -= 1; 
+        streak.innerHTML = "Enemigos restantes: " + contador;
+
+        if (contador <= 0) {
+          fadeOutElement(main);
+          setTimeout(() => {
+            fadeOutElement(centro);
+            fadeOutElement(bot1);
+            fadeInElement(ganado); 
+          }, 2000);
+
+          setTimeout(() => {
+            centro.style.display = "none"
+            bot1.style.display = "none"
+          }, 3000);
+
+        }
+        return; 
+      }
+
+      jugador.puntos_salud -= enemigo1.puntos_ataque;
+      actualizarEstadisticas();
+
+      if (jugador.puntos_salud <= 0) {
+        fadeOutElement(main);
+
+        setTimeout(() => {
+          fadeOutElement(centro);
+          fadeOutElement(bot1);
+          fadeInElement(perdido); 
+        }, 2000);
+
+        return; 
+      }
+
+      setTimeout(turnoCombate, 1000); 
+    }
+  }
+
+  actualizarEstadisticas();
+  turnoCombate();
 }
 
-function generarEnemigo(): Enemigo {
-  const enemigos: string[] = [
-    "Caído",
-    "Profano",
-    "Espectro",
-    "Abismo",
-    "Centinela",
-    "Sombra",
-    "Bestia",
-    "Verdugo",
-    "Profanador",
-    "Maldito",
-    "Serpiente",
-    "Portador",
-    "Devorador",
-    "Ladrón",
-    "Hereje",
-    "Nigromante",
-    "Vástago",
-    "Tirano",
-    "Coloso",
-    "Errante"
-  ];
-  
-  const nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
-  const enemigo = new Enemigo(nombreEnemigo, 100, 0, 0);
-  enemigo.calcularFuerzaInicial();
-  enemigo.soltarDinero();
-  return enemigo;
-}
 
 function empezarJuego() {
   let buscar = document.getElementById("ene");
@@ -172,7 +186,7 @@ function empezarJuego() {
     const elemento = document.getElementById(id);
     if (elemento) {
       fadeInElement(elemento);
-      streak.innerHTML = "Enemigos para ganar: " + 5;
+      streak.innerHTML = "Enemigos para ganar: " + contador;
       fadeInElement(streak)
     }
   });
@@ -270,50 +284,52 @@ function masVida() {
   }
 }
 
+function mostrarEst(jugador) {
 
-function empezarComb(enemigo1) {
-  fadeOutElement(combate);
+  const textoElemento = document.getElementById("textes");
 
-
-  function actualizarEstadisticas() {
-    nombpp.innerHTML = jugador.nombre + " -- HP: " + jugador.puntos_salud + " -- Atk: " + jugador.puntos_ataque;
-    nomben.innerHTML = enemigo1.nombre + " -- HP: " + enemigo1.puntos_salud + " -- Atk: " + enemigo1.puntos_ataque;
+  if (textoElemento) {
+    textoElemento.innerHTML = `
+      <p><strong>Estadísticas del Jugador</strong></p>
+      <p>Nombre: ${jugador.nombre}</p>
+      <p>Vida: ${jugador.puntos_salud}</p>
+      <p>Ataque: ${jugador.puntos_ataque}</p>
+      <p>Dinero: ${jugador.dinero}</p>
+    `;
   }
 
-  function turnoCombate() {
-    if (jugador.puntos_salud > 0 && enemigo1.puntos_salud > 0) {
-      enemigo1.puntos_salud -= jugador.puntos_ataque;
-      actualizarEstadisticas(); 
 
-      if (enemigo1.puntos_salud <= 0) {
-        jugador.dinero += enemigo1.dinero;
-        nomben.innerHTML = enemigo1.nombre + " ha sido derrotado!!";
-        fadeOutElement(imagen);
-        streak.innerHTML = "Enemigos para ganar: " + (contador -= 1);
-        return 
-      }
+}
 
-      jugador.puntos_salud -= enemigo1.puntos_ataque;
-      actualizarEstadisticas(); 
-      if (jugador.puntos_salud <= 0) {
-        fadeOutElement(main)
-
-        setTimeout(()=>{
-          fadeOutElement(centro)
-          fadeOutElement(bot1)
-          fadeInElement(perdido)
-        }, 2000)
-
-
-        return;
-      }
-
-      setTimeout(turnoCombate, 1000); 
-    }
-  }
-
-  actualizarEstadisticas();
-  turnoCombate();
+function generarEnemigo(): Enemigo {
+  const enemigos: string[] = [
+    "Caído",
+    "Profano",
+    "Espectro",
+    "Abismo",
+    "Centinela",
+    "Sombra",
+    "Bestia",
+    "Verdugo",
+    "Profanador",
+    "Maldito",
+    "Serpiente",
+    "Portador",
+    "Devorador",
+    "Ladrón",
+    "Hereje",
+    "Nigromante",
+    "Vástago",
+    "Tirano",
+    "Coloso",
+    "Errante"
+  ];
+  
+  const nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
+  const enemigo = new Enemigo(nombreEnemigo, 100, 0, 0);
+  enemigo.calcularFuerzaInicial();
+  enemigo.soltarDinero();
+  return enemigo;
 }
 
 //-------------------Ir A-------------------------
