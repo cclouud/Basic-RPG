@@ -19,7 +19,6 @@ this.dinero = 20
     }
 
 calcularFuerzaInicial(){
-        // Genera un número aleatorio entre 10 y 50 (puedes ajustar el rango)
         this.puntos_ataque = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
     }
 
@@ -49,7 +48,6 @@ console.log(`Nombre: ${this.nombre}, Salud: ${this.puntos_salud}, Ataque: ${this
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-const enemigos: string[] = ['Orco', 'Goblin', 'Troll', 'Dragón', 'Esqueleto', 'Vampiro'];
 
 export class Enemigo {
 
@@ -67,13 +65,11 @@ constructor  (nombre: string,puntos_salud: number, puntos_ataque: number, dinero
   }
 
 calcularFuerzaInicial(){
-    // Genera un número aleatorio entre 10 y 30 (puedes ajustar el rango)
     this.puntos_ataque = Math.floor(Math.random() * (30 - 10 + 1)) + 10;
   }
 
 soltarDinero(){
-    // Genera un número aleatorio entre 5 y 15 (puedes ajustar el rango)
-    this.dinero = Math.floor(Math.random() * ( 15 - 5 + 1)) + 10;
+    this.dinero = Math.floor(Math.random() * ( 25 - 18 + 1)) + 10;
   }
 
 imprimirEstadisticas(){

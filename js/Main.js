@@ -3,6 +3,7 @@ import { Jugador } from './Clases.js';
 import { Enemigo } from './Clases.js';
 //-------------Variables---------------------------
 let jugador;
+let enemigo1;
 let imagen = document.getElementById("enem");
 let divva = document.getElementById("divva");
 const tienda = document.getElementById("tie");
@@ -13,6 +14,8 @@ const vid = document.getElementById("mVida");
 const atq = document.getElementById("mAtq");
 const intercomb = document.getElementById("intercomb");
 const combate = document.getElementById("combate");
+let nombpp = document.getElementById("nombpp");
+let nomben = document.getElementById("nombene");
 //-----------------Funciones de Juego----------------
 export function crearJugador() {
     console.log("player");
@@ -78,7 +81,28 @@ function mostrarEst(jugador) {
     }
 }
 function generarEnemigo() {
-    const enemigos = ['Orco', 'Goblin', 'Troll', 'Dragon', 'Esqueleto', 'Vampiro'];
+    const enemigos = [
+        "Caído",
+        "Profano",
+        "Espectro",
+        "Abismo",
+        "Centinela",
+        "Sombra",
+        "Bestia",
+        "Verdugo",
+        "Profanador",
+        "Maldito",
+        "Serpiente",
+        "Portador",
+        "Devorador",
+        "Ladrón",
+        "Hereje",
+        "Nigromante",
+        "Vástago",
+        "Tirano",
+        "Coloso",
+        "Errante"
+    ];
     const nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
     const enemigo = new Enemigo(nombreEnemigo, 100, 0, 0);
     enemigo.calcularFuerzaInicial();
@@ -182,24 +206,31 @@ function masVida() {
         }, 40);
     }
 }
-function empezarComb() {
-    let enemigo = generarEnemigo();
+function empezarComb(enemigo1) {
+    function actualizarEstadisticas() {
+        nombpp.innerHTML = jugador.nombre + " -- HP: " + jugador.puntos_salud + " -- Atk: " + jugador.puntos_ataque;
+        nomben.innerHTML = enemigo1.nombre + " -- HP: " + enemigo1.puntos_salud + " -- Atk: " + enemigo1.puntos_ataque;
+    }
     function turnoCombate() {
-        if (jugador.puntos_salud > 0 && enemigo.puntos_salud > 0) {
-            enemigo.puntos_salud -= jugador.puntos_ataque;
-            if (enemigo.puntos_salud <= 0) {
-                jugador.dinero += enemigo.dinero;
+        fadeOutElement(combate);
+        if (jugador.puntos_salud > 0 && enemigo1.puntos_salud > 0) {
+            enemigo1.puntos_salud -= jugador.puntos_ataque;
+            actualizarEstadisticas();
+            if (enemigo1.puntos_salud <= 0) {
+                jugador.dinero += enemigo1.dinero;
+                nomben.innerHTML = enemigo1.nombre + " ha sido derrotado!!";
                 fadeOutElement(imagen);
                 return;
             }
-            // Turno del enemigo
-            jugador.puntos_salud -= enemigo.puntos_ataque;
+            jugador.puntos_salud -= enemigo1.puntos_ataque;
+            actualizarEstadisticas();
             if (jugador.puntos_salud <= 0) {
                 return;
             }
             setTimeout(turnoCombate, 1000);
         }
     }
+    actualizarEstadisticas();
     turnoCombate();
 }
 //-------------------Ir A-------------------------
@@ -225,7 +256,7 @@ export function irATienda() {
         fadeInBackground(div);
         fadeInElement(texto);
         texto.innerText = "";
-        let textoEscrito = "Bienvenido viajero. ¿Deseas mejorar tu vida o tu ataque a cambio de 15 Oro?";
+        let textoEscrito = "Bienvenido viajero. ¿Deseas mejorar tu vida o tu ataque a cambio de 20 Oro?";
         let indice = 0;
         const intervalo = setInterval(() => {
             if (indice < textoEscrito.length) {
@@ -270,9 +301,11 @@ export function irACombate() {
     disableButton(comb);
     enableButton(tienda);
     enableButton(menu);
+    fadeInElement(combate);
     let estadisticas = document.getElementById("estadisticas");
     const div = document.getElementById("canv");
     let texto = document.getElementById("text");
+    enemigo1 = generarEnemigo();
     setTimeout(() => {
         fadeOutElement(texto);
         fadeOutElement(estadisticas);
@@ -290,6 +323,8 @@ export function irACombate() {
             imagen.src = `/img/Ene${aleatene}.gif`;
             fadeInElement(imagen);
             fadeInElement(intercomb);
+            nombpp.innerHTML = jugador.nombre + " -- HP: " + jugador.puntos_salud + " -- Atk: " + jugador.puntos_ataque;
+            nomben.innerHTML = enemigo1.nombre + " -- HP: " + enemigo1.puntos_salud + " -- Atk: " + enemigo1.puntos_ataque;
             enableButton(comb);
         }, 200);
     }, 1000);
@@ -365,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
     comb.addEventListener('click', irACombate);
     vid.addEventListener('click', masVida);
     atq.addEventListener('click', masAtq);
-    combate.addEventListener('click', empezarComb);
+    combate.addEventListener('click', () => empezarComb(enemigo1));
 });
 //--------------------------------------------------------------
 function main() {

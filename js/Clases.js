@@ -38,7 +38,7 @@ export class Enemigo {
     }
     soltarDinero() {
         // Genera un número aleatorio entre 5 y 15 (puedes ajustar el rango)
-        this.dinero = Math.floor(Math.random() * (15 - 5 + 1)) + 10;
+        this.dinero = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
     }
     imprimirEstadisticas() {
         console.log(`Enemigo: ${this.nombre},Ataque: ${this.puntos_ataque}`);
