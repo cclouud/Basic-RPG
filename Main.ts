@@ -147,12 +147,12 @@ function masAtq() {
   disableButton(atq)
   disableButton(vid)
   if (jugador.dinero >= 15) { 
-    jugador.puntos_ataque += 10;
-    jugador.dinero -= 15; 
+    jugador.puntos_ataque += 20;
+    jugador.dinero -= 20; 
 
     let texto = document.getElementById("text")
     texto.innerText = ""
-    let textoEscrito = "Tu ataque ha mejorado en 10 puntos"
+    let textoEscrito = "Tu ataque ha mejorado en 20 puntos"
     let indice = 0
 
     const intervalo = setInterval(() => {
@@ -195,12 +195,12 @@ function masVida(){
   disableButton(atq)
 
   if (jugador.dinero >= 15) { 
-    jugador.puntos_salud += 20;
-    jugador.dinero -= 15; 
+    jugador.puntos_salud += 50;
+    jugador.dinero -= 20; 
 
     let texto = document.getElementById("text")
     texto.innerText = ""
-    let textoEscrito = "Tu salud ha mejorado en 10 puntos"
+    let textoEscrito = "Tu salud ha mejorado en 50 puntos"
     let indice = 0
 
     const intervalo = setInterval(() => {
