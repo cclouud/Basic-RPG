@@ -3,7 +3,7 @@ export class Jugador {
         this.nombre = nombre;
         this.puntos_salud = puntos_salud;
         this.puntos_ataque = 0;
-        this.dinero = 15;
+        this.dinero = 20;
     }
     calcularFuerzaInicial() {
         // Genera un número aleatorio entre 10 y 50 (puedes ajustar el rango)

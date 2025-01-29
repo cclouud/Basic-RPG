@@ -106,11 +106,11 @@ function masAtq() {
     disableButton(atq);
     disableButton(vid);
     if (jugador.dinero >= 15) {
-        jugador.puntos_ataque += 10;
-        jugador.dinero -= 15;
+        jugador.puntos_ataque += 20;
+        jugador.dinero -= 20;
         let texto = document.getElementById("text");
         texto.innerText = "";
-        let textoEscrito = "Tu ataque ha mejorado en 10 puntos";
+        let textoEscrito = "Tu ataque ha mejorado en 20 puntos";
         let indice = 0;
         const intervalo = setInterval(() => {
             if (indice < textoEscrito.length) {
@@ -146,11 +146,11 @@ function masVida() {
     disableButton(vid);
     disableButton(atq);
     if (jugador.dinero >= 15) {
-        jugador.puntos_salud += 20;
-        jugador.dinero -= 15;
+        jugador.puntos_salud += 50;
+        jugador.dinero -= 20;
         let texto = document.getElementById("text");
         texto.innerText = "";
-        let textoEscrito = "Tu salud ha mejorado en 10 puntos";
+        let textoEscrito = "Tu salud ha mejorado en 50 puntos";
         let indice = 0;
         const intervalo = setInterval(() => {
             if (indice < textoEscrito.length) {
@@ -184,35 +184,22 @@ function masVida() {
 }
 function empezarComb() {
     let enemigo = generarEnemigo();
-    console.log("hola1");
-    //const textoCombate = document.getElementById("textCombate"); // Suponiendo que tienes un elemento para mostrar el texto del combate
     function turnoCombate() {
         if (jugador.puntos_salud > 0 && enemigo.puntos_salud > 0) {
-            // Turno del jugador
             enemigo.puntos_salud -= jugador.puntos_ataque;
-            //   textoCombate.innerText += `¡${jugador.nombre} ataca a ${enemigo.nombre} por ${jugador.puntos_ataque} puntos de daño!\n`;
-            //   textoCombate.innerText += `${enemigo.nombre} tiene ${enemigo.puntos_salud} puntos de vida restantes.\n`;
             if (enemigo.puntos_salud <= 0) {
-                //  textoCombate.innerText += `¡${enemigo.nombre} ha sido derrotado!\n`;
-                jugador.dinero += enemigo.dinero; // El jugador gana el dinero del enemigo
+                jugador.dinero += enemigo.dinero;
                 fadeOutElement(imagen);
-                // textoCombate.innerText += `¡${jugador.nombre} ha ganado ${enemigo.dinero} monedas!\n`;
                 return;
             }
             // Turno del enemigo
             jugador.puntos_salud -= enemigo.puntos_ataque;
-            console.log("hola2");
-            // textoCombate.innerText += `¡${enemigo.nombre} ataca a ${jugador.nombre} por ${enemigo.puntos_ataque} puntos de daño!\n`;
-            //textoCombate.innerText += `${jugador.nombre} tiene ${jugador.puntos_salud} puntos de vida restantes.\n`;
             if (jugador.puntos_salud <= 0) {
-                //    textoCombate.innerText += `¡${jugador.nombre} ha sido derrotado!\n`;
                 return;
             }
-            // Continuar el combate
-            setTimeout(turnoCombate, 1000); // Espera 1 segundo antes del siguiente turno
+            setTimeout(turnoCombate, 1000);
         }
     }
-    // Iniciar el combate
     turnoCombate();
 }
 //-------------------Ir A-------------------------

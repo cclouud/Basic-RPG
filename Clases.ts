@@ -14,7 +14,7 @@ constructor  (nombre: string, puntos_salud: number, puntos_ataque: number, diner
 this.nombre = nombre
 this.puntos_salud = puntos_salud
 this.puntos_ataque = 0
-this.dinero = 15
+this.dinero = 20
 
     }
 
