@@ -4,6 +4,7 @@ import { Enemigo } from './Clases.js';
 //-------------Variables---------------------------
 let jugador;
 let enemigo1;
+let contador;
 let imagen = document.getElementById("enem");
 let divva = document.getElementById("divva");
 const tienda = document.getElementById("tie");
@@ -14,8 +15,15 @@ const vid = document.getElementById("mVida");
 const atq = document.getElementById("mAtq");
 const intercomb = document.getElementById("intercomb");
 const combate = document.getElementById("combate");
+const botsalir = document.getElementById("sa");
+const bot1 = document.getElementById("botoness");
 let nombpp = document.getElementById("nombpp");
 let nomben = document.getElementById("nombene");
+let centro = document.getElementById("canv");
+let textoro = document.getElementById("textoro");
+let perdido = document.getElementById("perdido");
+let main = document.getElementById("mainC");
+let streak = document.getElementById("textcont");
 //-----------------Funciones de Juego----------------
 export function crearJugador() {
     console.log("player");
@@ -123,6 +131,8 @@ function empezarJuego() {
         const elemento = document.getElementById(id);
         if (elemento) {
             fadeInElement(elemento);
+            streak.innerHTML = "Enemigos para ganar: " + 5;
+            fadeInElement(streak);
         }
     });
 }
@@ -131,7 +141,8 @@ function masAtq() {
     disableButton(vid);
     if (jugador.dinero >= 15) {
         jugador.puntos_ataque += 20;
-        jugador.dinero -= 20;
+        jugador.dinero -= 15;
+        textoro.innerHTML = "Oro: " + jugador.dinero;
         let texto = document.getElementById("text");
         texto.innerText = "";
         let textoEscrito = "Tu ataque ha mejorado en 20 puntos";
@@ -171,7 +182,8 @@ function masVida() {
     disableButton(atq);
     if (jugador.dinero >= 15) {
         jugador.puntos_salud += 50;
-        jugador.dinero -= 20;
+        jugador.dinero -= 15;
+        textoro.innerHTML = "Oro: " + jugador.dinero;
         let texto = document.getElementById("text");
         texto.innerText = "";
         let textoEscrito = "Tu salud ha mejorado en 50 puntos";
@@ -207,12 +219,12 @@ function masVida() {
     }
 }
 function empezarComb(enemigo1) {
+    fadeOutElement(combate);
     function actualizarEstadisticas() {
         nombpp.innerHTML = jugador.nombre + " -- HP: " + jugador.puntos_salud + " -- Atk: " + jugador.puntos_ataque;
         nomben.innerHTML = enemigo1.nombre + " -- HP: " + enemigo1.puntos_salud + " -- Atk: " + enemigo1.puntos_ataque;
     }
     function turnoCombate() {
-        fadeOutElement(combate);
         if (jugador.puntos_salud > 0 && enemigo1.puntos_salud > 0) {
             enemigo1.puntos_salud -= jugador.puntos_ataque;
             actualizarEstadisticas();
@@ -220,11 +232,18 @@ function empezarComb(enemigo1) {
                 jugador.dinero += enemigo1.dinero;
                 nomben.innerHTML = enemigo1.nombre + " ha sido derrotado!!";
                 fadeOutElement(imagen);
+                streak.innerHTML = "Enemigos para ganar: " + (contador -= 1);
                 return;
             }
             jugador.puntos_salud -= enemigo1.puntos_ataque;
             actualizarEstadisticas();
             if (jugador.puntos_salud <= 0) {
+                fadeOutElement(main);
+                setTimeout(() => {
+                    fadeOutElement(centro);
+                    fadeOutElement(bot1);
+                    fadeInElement(perdido);
+                }, 2000);
                 return;
             }
             setTimeout(turnoCombate, 1000);
@@ -245,6 +264,7 @@ export function irATienda() {
     setTimeout(() => {
         fadeOutElement(estadisticas);
         fadeOutElement(imagen);
+        fadeOutElement(streak);
         fadeOutElement(intercomb);
     }, 500);
     const div = document.getElementById("canv");
@@ -253,10 +273,11 @@ export function irATienda() {
         div.style.backgroundImage = "url('img/tienda.gif')";
         div.style.backgroundSize = "cover";
         div.style.backgroundPosition = "bottom center";
+        textoro.innerHTML = "Oro: " + jugador.dinero;
         fadeInBackground(div);
         fadeInElement(texto);
         texto.innerText = "";
-        let textoEscrito = "Bienvenido viajero. ¿Deseas mejorar tu vida o tu ataque a cambio de 20 Oro?";
+        let textoEscrito = "Bienvenido viajero. ¿Deseas mejorar tu vida o tu ataque a cambio de 15 Oro?";
         let indice = 0;
         const intervalo = setInterval(() => {
             if (indice < textoEscrito.length) {
@@ -272,6 +293,7 @@ export function irATienda() {
     }, 1000);
     setTimeout(() => {
         fadeInElement(divva);
+        fadeInElement(textoro);
     }, 3000);
 }
 export function irAMenu() {
@@ -285,6 +307,7 @@ export function irAMenu() {
         fadeOutElement(imagen);
         fadeOutElement(divva);
         fadeOutElement(intercomb);
+        fadeOutElement(textoro);
     }, 600);
     const div = document.getElementById("canv");
     fadeOutBackground(div);
@@ -295,6 +318,7 @@ export function irAMenu() {
         fadeInBackground(div);
         mostrarEst(jugador);
         fadeInElement(estadisticas);
+        fadeInElement(streak);
     }, 1000);
 }
 export function irACombate() {
@@ -310,6 +334,8 @@ export function irACombate() {
         fadeOutElement(texto);
         fadeOutElement(estadisticas);
         fadeOutElement(divva);
+        fadeOutElement(textoro);
+        fadeOutElement(streak);
     }, 500);
     fadeOutBackground(div);
     setTimeout(() => {
@@ -327,6 +353,14 @@ export function irACombate() {
             nomben.innerHTML = enemigo1.nombre + " -- HP: " + enemigo1.puntos_salud + " -- Atk: " + enemigo1.puntos_ataque;
             enableButton(comb);
         }, 200);
+    }, 1000);
+}
+function salir() {
+    fadeOutElement(centro);
+    fadeOutElement(bot1);
+    setTimeout(() => {
+        centro.style.display = "none";
+        bot1.style.display = "none";
     }, 1000);
 }
 //-------------Funciones para animaciones---------------------
@@ -401,61 +435,5 @@ document.addEventListener('DOMContentLoaded', () => {
     vid.addEventListener('click', masVida);
     atq.addEventListener('click', masAtq);
     combate.addEventListener('click', () => empezarComb(enemigo1));
+    botsalir.addEventListener('click', salir);
 });
-//--------------------------------------------------------------
-function main() {
-    const jugador = crearJugador();
-    let salir = false;
-    while (!salir) {
-        let opcion = 1;
-        switch (opcion) {
-            case 1: // Luchar contra el enemigo
-                const enemigo = generarEnemigo();
-                console.log(`¡Un ${enemigo.nombre} aparecio!`);
-                console.log(`Ataque enemigo: ${enemigo.puntos_ataque}`);
-                console.log(`Tu ataque: ${jugador.puntos_ataque}`);
-                if (jugador.puntos_ataque >= enemigo.puntos_ataque) {
-                    console.log(`¡Venciste al ${enemigo.nombre} y ganaste ${enemigo.dinero} monedas!`);
-                    jugador.dinero += enemigo.dinero;
-                }
-                else {
-                    console.log(`El ${enemigo.nombre} te vencio. Perdiste ${enemigo.puntos_ataque} puntos de salud.`);
-                    jugador.puntos_salud -= enemigo.puntos_ataque;
-                    if (jugador.puntos_salud <= 0) {
-                        console.log("Has sido derrotado. Fin del juego.");
-                        salir = true;
-                    }
-                }
-                break;
-            case 2: // Comprar items
-                console.log("\n--- Tienda de items ---");
-                console.log("1. Pocion de salud (5 monedas) - Recupera 20 puntos de salud");
-                console.log("2. Mejora de ataque (10 monedas) - Incrementa tu ataque en 5 puntos");
-                const item = null;
-                if (item === 1 && jugador.dinero >= 5) {
-                    jugador.dinero -= 5;
-                    jugador.puntos_salud += 20;
-                    console.log("Has comprado una pocion de salud. Salud +20.");
-                }
-                else if (item === 2 && jugador.dinero >= 10) {
-                    jugador.dinero -= 10;
-                    jugador.puntos_ataque += 5;
-                    console.log("Has comprado una mejora de ataque. Ataque +5.");
-                }
-                else {
-                    console.log("No tienes suficiente dinero o ingresaste una opcion invalida.");
-                }
-                break;
-            case 3: // Consultar estadisticas
-                console.log("\n--- Tus estadisticas ---");
-                jugador.imprimirEstadisticas();
-                break;
-            case 4: // Salir del juego
-                console.log("Gracias por jugar. ¡Hasta la proxima!");
-                salir = true;
-                break;
-            default:
-                console.log("Opcion invalida.");
-        }
-    }
-}

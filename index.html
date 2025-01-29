@@ -11,6 +11,8 @@
 <body>
     <div id="particles"></div>
 
+    <div id="perdido">Has Muerto</div>
+    <div id="ganado">Has salvado Medac</div>
 
     <div class="cent" id="canv">
 
@@ -29,8 +31,9 @@
             <div id="barrae">
                 <p id="nombene">Enemigo</p>
             </div>
-            <div id="barrapp"></div>
-            <div id="barraen"></div>
+
+
+
             <button id="combate">Empezar Combate</button>
     
     
@@ -41,10 +44,13 @@
         <img src="/img/Ene2.gif" id="enem" alt="">
 
         <p id="text"></p>
+        <p id="textoro"></p>
+        <p id="textcont"></p>
+
 
 
         <div class="texto-encima">
-            <input type="text" id="nombre" placeholder="Escribe tu nombre aquí"> <br> <br> <br>
+            <input type="text" id="nombre" value="Jugador"> <br> <br> <br>
 
             <button id="guardNom">Enviar Nombre</button>
         </div>
@@ -62,7 +68,7 @@
 
         <button id="genshinNever" type="" onclick="desaparecer(), inicio()">Skip</button>
     </div>
-    <div class="cent2">
+    <div class="cent2" id="botoness">
         <div class="but">
             <div class="but">
                 <button id="ene">Buscar Enemigo</button>
@@ -86,6 +92,14 @@
 
             </div>
         </div>
+
+        <!-- --------------------------------------------------- -->
+
+
+        <div id="overlay">
+            <div id="silueta"></div>
+            <div id="objeto"></div>
+          </div>
 
     </div>
     <script type="module" src="./js/Main.js"></script>

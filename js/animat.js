@@ -15,40 +15,35 @@ let dives = document.getElementById("estadisticas");
 let imagen = document.getElementById("enem");
 let divva = document.getElementById("divva");
 let intercomb = document.getElementById("intercomb")
+let textoro = document.getElementById("textoro")
+let perdido = document.getElementById("perdido")
+let ganado = document.getElementById("ganado")
+let streak = document.getElementById("textcont")
+
 
 buscar.style.opacity = "0";
 tienda.style.opacity = "0";
 sa.style.opacity = "0";
 men.style.opacity = "0";
+perdido.style.opacity = "0"
+ganado.style.opacity = "0"
+streak.style.opacity = "0"
 
 botong.style.display = "none";
 nombre.style.display = "none";
 texto.style.display = "none";
-
 
 main.style.opacity = "0";
 dives.style.opacity = "0";
 imagen.style.opacity = "0";
 divva.style.opacity = "0";
 intercomb.style.opacity = "0"
+textoro.style.opacity = "0"
 
 //------------------------Funciones Principales-------------------------
 
-
-
-
-function aparecer() {
-    let bot = document.getElementById("genshinNever");
-    fadeInElement(bot); 
-}
-
-function desaparecer() {
-    let bot = document.getElementById("genshinNever");
-    fadeOutElement(bot); 
-}
-
-
 function inicio() {
+
     let textoEscrito = "Bienvenido, Introduce tu nombre";
     let indice = 0;
     let velocidad = 100;
@@ -95,6 +90,8 @@ function inicio() {
     });
 }
 
+
+
 //---------------------------Funciones de Animacion-----------------------
 
 function fadeOutElement(element) {
@@ -131,4 +128,13 @@ function disableButton(button) {
     button.disabled = false; 
   }
 
+  function aparecer() {
+    let bot = document.getElementById("genshinNever");
+    fadeInElement(bot); 
+}
+
+function desaparecer() {
+    let bot = document.getElementById("genshinNever");
+    fadeOutElement(bot); 
+}
 
