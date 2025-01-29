@@ -15,7 +15,7 @@ const boton = document.getElementById("guardNom");
 const vid = document.getElementById("mVida")
 const atq = document.getElementById("mAtq")
 const intercomb = document.getElementById("intercomb")
-
+const combate = document.getElementById("combate")
 
 //-----------------Funciones de Juego----------------
 
@@ -117,7 +117,7 @@ function mostrarEst(jugador) {
 function generarEnemigo(): Enemigo {
   const enemigos: string[] = ['Orco', 'Goblin', 'Troll', 'Dragon', 'Esqueleto', 'Vampiro'];
   const nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
-  const enemigo = new Enemigo(nombreEnemigo, 0, 0);
+  const enemigo = new Enemigo(nombreEnemigo, 100, 0, 0);
   enemigo.calcularFuerzaInicial();
   enemigo.soltarDinero();
   return enemigo;
@@ -232,6 +232,35 @@ function masVida(){
     }, 40);
 
   }
+}
+
+function empezarComb() {
+  let enemigo = generarEnemigo();
+
+
+  function turnoCombate() {
+    if (jugador.puntos_salud > 0 && enemigo.puntos_salud > 0) {
+      enemigo.puntos_salud -= jugador.puntos_ataque;
+
+
+      if (enemigo.puntos_salud <= 0) {
+        jugador.dinero += enemigo.dinero; 
+        fadeOutElement(imagen)
+        return;
+      }
+
+      // Turno del enemigo
+      jugador.puntos_salud -= enemigo.puntos_ataque;
+
+      if (jugador.puntos_salud <= 0) {
+        return;
+      }
+
+      setTimeout(turnoCombate, 1000);
+    }
+  }
+
+  turnoCombate();
 }
 
 //-------------------Ir A-------------------------
@@ -423,22 +452,17 @@ function enableButton(button) {
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', crearJugador);
   
-  if (tienda) {
     tienda.addEventListener('click', irATienda);
-  }
-  if (menu) {
+  
     menu.addEventListener('click', irAMenu);
-  }
-  if (comb) {
+  
     comb.addEventListener('click', irACombate);
-  }
-  if (vid){
+  
     vid.addEventListener('click', masVida);
-  }
-  if (atq){
-    atq.addEventListener('click', masAtq)
-  }
+  
+    atq.addEventListener('click', masAtq);
 
+    combate.addEventListener('click', empezarComb)
 });
 
 

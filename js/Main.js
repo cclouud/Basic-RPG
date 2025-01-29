@@ -12,6 +12,7 @@ const boton = document.getElementById("guardNom");
 const vid = document.getElementById("mVida");
 const atq = document.getElementById("mAtq");
 const intercomb = document.getElementById("intercomb");
+const combate = document.getElementById("combate");
 //-----------------Funciones de Juego----------------
 export function crearJugador() {
     console.log("player");
@@ -79,7 +80,7 @@ function mostrarEst(jugador) {
 function generarEnemigo() {
     const enemigos = ['Orco', 'Goblin', 'Troll', 'Dragon', 'Esqueleto', 'Vampiro'];
     const nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
-    const enemigo = new Enemigo(nombreEnemigo, 0, 0);
+    const enemigo = new Enemigo(nombreEnemigo, 100, 0, 0);
     enemigo.calcularFuerzaInicial();
     enemigo.soltarDinero();
     return enemigo;
@@ -180,6 +181,39 @@ function masVida() {
             }
         }, 40);
     }
+}
+function empezarComb() {
+    let enemigo = generarEnemigo();
+    console.log("hola1");
+    //const textoCombate = document.getElementById("textCombate"); // Suponiendo que tienes un elemento para mostrar el texto del combate
+    function turnoCombate() {
+        if (jugador.puntos_salud > 0 && enemigo.puntos_salud > 0) {
+            // Turno del jugador
+            enemigo.puntos_salud -= jugador.puntos_ataque;
+            //   textoCombate.innerText += `¡${jugador.nombre} ataca a ${enemigo.nombre} por ${jugador.puntos_ataque} puntos de daño!\n`;
+            //   textoCombate.innerText += `${enemigo.nombre} tiene ${enemigo.puntos_salud} puntos de vida restantes.\n`;
+            if (enemigo.puntos_salud <= 0) {
+                //  textoCombate.innerText += `¡${enemigo.nombre} ha sido derrotado!\n`;
+                jugador.dinero += enemigo.dinero; // El jugador gana el dinero del enemigo
+                fadeOutElement(imagen);
+                // textoCombate.innerText += `¡${jugador.nombre} ha ganado ${enemigo.dinero} monedas!\n`;
+                return;
+            }
+            // Turno del enemigo
+            jugador.puntos_salud -= enemigo.puntos_ataque;
+            console.log("hola2");
+            // textoCombate.innerText += `¡${enemigo.nombre} ataca a ${jugador.nombre} por ${enemigo.puntos_ataque} puntos de daño!\n`;
+            //textoCombate.innerText += `${jugador.nombre} tiene ${jugador.puntos_salud} puntos de vida restantes.\n`;
+            if (jugador.puntos_salud <= 0) {
+                //    textoCombate.innerText += `¡${jugador.nombre} ha sido derrotado!\n`;
+                return;
+            }
+            // Continuar el combate
+            setTimeout(turnoCombate, 1000); // Espera 1 segundo antes del siguiente turno
+        }
+    }
+    // Iniciar el combate
+    turnoCombate();
 }
 //-------------------Ir A-------------------------
 export function irATienda() {
@@ -339,21 +373,12 @@ function enableButton(button) {
 //-----------------DOM y eventos de click------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', crearJugador);
-    if (tienda) {
-        tienda.addEventListener('click', irATienda);
-    }
-    if (menu) {
-        menu.addEventListener('click', irAMenu);
-    }
-    if (comb) {
-        comb.addEventListener('click', irACombate);
-    }
-    if (vid) {
-        vid.addEventListener('click', masVida);
-    }
-    if (atq) {
-        atq.addEventListener('click', masAtq);
-    }
+    tienda.addEventListener('click', irATienda);
+    menu.addEventListener('click', irAMenu);
+    comb.addEventListener('click', irACombate);
+    vid.addEventListener('click', masVida);
+    atq.addEventListener('click', masAtq);
+    combate.addEventListener('click', empezarComb);
 });
 //--------------------------------------------------------------
 function main() {

@@ -26,8 +26,9 @@ export class Jugador {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 const enemigos = ['Orco', 'Goblin', 'Troll', 'Dragón', 'Esqueleto', 'Vampiro'];
 export class Enemigo {
-    constructor(nombre, puntos_ataque, dinero) {
+    constructor(nombre, puntos_salud, puntos_ataque, dinero) {
         this.nombre = nombre;
+        this.puntos_salud = 100;
         this.puntos_ataque = 0;
         this.dinero = 0;
     }

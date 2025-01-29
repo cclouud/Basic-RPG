@@ -54,12 +54,14 @@ const enemigos: string[] = ['Orco', 'Goblin', 'Troll', 'Dragón', 'Esqueleto', '
 export class Enemigo {
 
     nombre: string;
+    puntos_salud: number;
     puntos_ataque: number;
     dinero: number;
 
-constructor  (nombre: string,puntos_ataque: number, dinero: number) {
+constructor  (nombre: string,puntos_salud: number, puntos_ataque: number, dinero: number) {
 
     this.nombre = nombre
+    this.puntos_salud = 100
     this.puntos_ataque = 0
     this.dinero = 0
   }
