@@ -4,7 +4,7 @@ import { Enemigo } from './Clases.js';
 //-------------Variables---------------------------
 let jugador;
 let enemigo1;
-let contador = 1;
+let contador = 5;
 let imagen = document.getElementById("enem");
 let divva = document.getElementById("divva");
 const tienda = document.getElementById("tie");
@@ -98,6 +98,7 @@ function empezarComb(enemigo1) {
                     setTimeout(() => {
                         fadeOutElement(centro);
                         fadeOutElement(bot1);
+                        ganado.style.display = "";
                         fadeInElement(ganado);
                     }, 2000);
                     setTimeout(() => {
@@ -114,6 +115,7 @@ function empezarComb(enemigo1) {
                 setTimeout(() => {
                     fadeOutElement(centro);
                     fadeOutElement(bot1);
+                    perdido.style.display = "";
                     fadeInElement(perdido);
                 }, 2000);
                 return;
@@ -303,7 +305,7 @@ export function irATienda() {
                 enableButton(vid);
                 enableButton(atq);
             }
-        }, 50);
+        }, 40);
     }, 1000);
     setTimeout(() => {
         fadeInElement(divva);

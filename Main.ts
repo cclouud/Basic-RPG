@@ -7,7 +7,7 @@ import { Enemigo } from './Clases.js';
 
 let jugador;
 let enemigo1;
-let contador = 1;
+let contador = 5;
 let imagen = document.getElementById("enem") as HTMLImageElement;
 let divva = document.getElementById("divva")
 const tienda = document.getElementById("tie");
@@ -28,6 +28,7 @@ let perdido = document.getElementById("perdido")
 let main = document.getElementById("mainC");
 let streak = document.getElementById("textcont")
 let ganado = document.getElementById("ganado")
+
 
 //-----------------Funciones de Juego----------------
 
@@ -134,6 +135,7 @@ function empezarComb(enemigo1) {
           setTimeout(() => {
             fadeOutElement(centro);
             fadeOutElement(bot1);
+            ganado.style.display = ""
             fadeInElement(ganado); 
           }, 2000);
 
@@ -155,6 +157,7 @@ function empezarComb(enemigo1) {
         setTimeout(() => {
           fadeOutElement(centro);
           fadeOutElement(bot1);
+          perdido.style.display = ""
           fadeInElement(perdido); 
         }, 2000);
 
@@ -377,7 +380,7 @@ export function irATienda() {
         enableButton(vid)
         enableButton(atq)
       }
-    }, 50);
+    }, 40);
   }, 1000);
 
   setTimeout(() => {

@@ -26,12 +26,14 @@ tienda.style.opacity = "0";
 sa.style.opacity = "0";
 men.style.opacity = "0";
 perdido.style.opacity = "0"
-ganado.style.opacity = "0"
 streak.style.opacity = "0"
+ganado.style.opacity = "0"
 
 botong.style.display = "none";
 nombre.style.display = "none";
 texto.style.display = "none";
+ganado.style.display = "none"
+perdido.style.display = "none"
 
 main.style.opacity = "0";
 dives.style.opacity = "0";
