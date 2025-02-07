@@ -1,54 +1,62 @@
+"use strict";
 //---------------Imports----------------------------
-import { Jugador } from './Clases.js';
-import { Enemigo } from './Clases.js';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.crearJugador = crearJugador;
+exports.irATienda = irATienda;
+exports.irAMenu = irAMenu;
+exports.irACombate = irACombate;
+exports.fadeOutBackground = fadeOutBackground;
+exports.fadeInBackground = fadeInBackground;
+var Clases_js_1 = require("./Clases.js");
+var Clases_js_2 = require("./Clases.js");
 //-------------Variables---------------------------
-let jugador;
-let enemigo1;
-let contador = 5;
-let imagen = document.getElementById("enem");
-let divva = document.getElementById("divva");
-const tienda = document.getElementById("tie");
-const menu = document.getElementById("men");
-const comb = document.getElementById("ene");
-const boton = document.getElementById("guardNom");
-const vid = document.getElementById("mVida");
-const atq = document.getElementById("mAtq");
-const intercomb = document.getElementById("intercomb");
-const combate = document.getElementById("combate");
-const botsalir = document.getElementById("sa");
-const bot1 = document.getElementById("botoness");
-let nombpp = document.getElementById("nombpp");
-let nomben = document.getElementById("nombene");
-let centro = document.getElementById("canv");
-let textoro = document.getElementById("textoro");
-let perdido = document.getElementById("perdido");
-let main = document.getElementById("mainC");
-let streak = document.getElementById("textcont");
-let ganado = document.getElementById("ganado");
+var jugador;
+var enemigo1;
+var contador = 5;
+var imagen = document.getElementById("enem");
+var divva = document.getElementById("divva");
+var tienda = document.getElementById("tie");
+var menu = document.getElementById("men");
+var comb = document.getElementById("ene");
+var boton = document.getElementById("guardNom");
+var vid = document.getElementById("mVida");
+var atq = document.getElementById("mAtq");
+var intercomb = document.getElementById("intercomb");
+var combate = document.getElementById("combate");
+var botsalir = document.getElementById("sa");
+var bot1 = document.getElementById("botoness");
+var nombpp = document.getElementById("nombpp");
+var nomben = document.getElementById("nombene");
+var centro = document.getElementById("canv");
+var textoro = document.getElementById("textoro");
+var perdido = document.getElementById("perdido");
+var main = document.getElementById("mainC");
+var streak = document.getElementById("textcont");
+var ganado = document.getElementById("ganado");
 //-----------------Funciones de Juego----------------
-export function crearJugador() {
+function crearJugador() {
     console.log("player");
-    let nombre = document.getElementById("nombre").value;
-    jugador = new Jugador(nombre, 100, 0, 2);
+    var nombre = document.getElementById("nombre").value;
+    jugador = new Clases_js_1.Jugador(nombre, 100, 0, 2);
     jugador.calcularFuerzaInicial();
     mostrarEst(jugador);
-    const div = document.getElementById("canv");
+    var div = document.getElementById("canv");
     div.style.backgroundImage = "url('/img/menu.gif')";
     div.style.backgroundSize = "";
     div.style.backgroundPosition = "bottom center";
-    let botong = document.getElementById("guardNom");
-    setTimeout(() => {
+    var botong = document.getElementById("guardNom");
+    setTimeout(function () {
         fadeOutElement(botong);
     }, 700);
-    let no = document.getElementById("nombre");
-    setTimeout(() => {
+    var no = document.getElementById("nombre");
+    setTimeout(function () {
         fadeOutElement(no);
     }, 1000);
-    let texto = document.getElementById("text");
+    var texto = document.getElementById("text");
     texto.innerText = "";
-    let textoEscrito = "Comienza tu viaje y salva Medac";
-    let indice = 0;
-    const intervalo = setInterval(() => {
+    var textoEscrito = "Comienza tu viaje y salva Medac";
+    var indice = 0;
+    var intervalo = setInterval(function () {
         if (indice < textoEscrito.length) {
             texto.textContent += textoEscrito[indice];
             indice++;
@@ -57,22 +65,22 @@ export function crearJugador() {
             clearInterval(intervalo);
         }
     }, 40);
-    setTimeout(() => {
+    setTimeout(function () {
         fadeOutElement(texto);
         texto.style.display = "none";
         no.style.display = "none";
         botong.style.display = "none";
     }, 3000);
-    let main = document.getElementById("mainC");
-    let estadisticas = document.getElementById("estadisticas");
-    setTimeout(() => {
+    var main = document.getElementById("mainC");
+    var estadisticas = document.getElementById("estadisticas");
+    setTimeout(function () {
         fadeInElement(main);
         fadeInElement(estadisticas);
         main.style.display = "";
         no.style.display = "none";
         botong.style.display = "none";
     }, 4000);
-    setTimeout(() => {
+    setTimeout(function () {
         empezarJuego();
     }, 4000);
     return jugador;
@@ -95,13 +103,13 @@ function empezarComb(enemigo1) {
                 streak.innerHTML = "Enemigos restantes: " + contador;
                 if (contador <= 0) {
                     fadeOutElement(main);
-                    setTimeout(() => {
+                    setTimeout(function () {
                         fadeOutElement(centro);
                         fadeOutElement(bot1);
                         ganado.style.display = "";
                         fadeInElement(ganado);
                     }, 2000);
-                    setTimeout(() => {
+                    setTimeout(function () {
                         centro.style.display = "none";
                         bot1.style.display = "none";
                     }, 3000);
@@ -112,7 +120,7 @@ function empezarComb(enemigo1) {
             actualizarEstadisticas();
             if (jugador.puntos_salud <= 0) {
                 fadeOutElement(main);
-                setTimeout(() => {
+                setTimeout(function () {
                     fadeOutElement(centro);
                     fadeOutElement(bot1);
                     perdido.style.display = "";
@@ -127,17 +135,17 @@ function empezarComb(enemigo1) {
     turnoCombate();
 }
 function empezarJuego() {
-    let buscar = document.getElementById("ene");
-    let tienda = document.getElementById("tie");
-    let sa = document.getElementById("sa");
-    let men = document.getElementById("men");
+    var buscar = document.getElementById("ene");
+    var tienda = document.getElementById("tie");
+    var sa = document.getElementById("sa");
+    var men = document.getElementById("men");
     men.style.opacity = "0";
     buscar.style.opacity = "0";
     tienda.style.opacity = "0";
     sa.style.opacity = "0";
-    const elementos = ['ene', 'tie', 'sa', 'men'];
-    elementos.forEach(id => {
-        const elemento = document.getElementById(id);
+    var elementos = ['ene', 'tie', 'sa', 'men'];
+    elementos.forEach(function (id) {
+        var elemento = document.getElementById(id);
         if (elemento) {
             fadeInElement(elemento);
             streak.innerHTML = "Enemigos para ganar: " + contador;
@@ -152,34 +160,34 @@ function masAtq() {
         jugador.puntos_ataque += 20;
         jugador.dinero -= 15;
         textoro.innerHTML = "Oro: " + jugador.dinero;
-        let texto = document.getElementById("text");
-        texto.innerText = "";
-        let textoEscrito = "Tu ataque ha mejorado en 20 puntos";
-        let indice = 0;
-        const intervalo = setInterval(() => {
-            if (indice < textoEscrito.length) {
-                texto.textContent += textoEscrito[indice];
-                indice++;
+        var texto_1 = document.getElementById("text");
+        texto_1.innerText = "";
+        var textoEscrito_1 = "Tu ataque ha mejorado en 20 puntos";
+        var indice_1 = 0;
+        var intervalo_1 = setInterval(function () {
+            if (indice_1 < textoEscrito_1.length) {
+                texto_1.textContent += textoEscrito_1[indice_1];
+                indice_1++;
             }
             else {
-                clearInterval(intervalo);
+                clearInterval(intervalo_1);
                 enableButton(atq);
                 enableButton(vid);
             }
         }, 40);
     }
     else {
-        let texto = document.getElementById("text");
-        texto.innerText = "";
-        let textoEscrito = "No tienes suficiente dinero, prueba a matar un par de bichos";
-        let indice = 0;
-        const intervalo = setInterval(() => {
-            if (indice < textoEscrito.length) {
-                texto.textContent += textoEscrito[indice];
-                indice++;
+        var texto_2 = document.getElementById("text");
+        texto_2.innerText = "";
+        var textoEscrito_2 = "No tienes suficiente dinero, prueba a matar un par de bichos";
+        var indice_2 = 0;
+        var intervalo_2 = setInterval(function () {
+            if (indice_2 < textoEscrito_2.length) {
+                texto_2.textContent += textoEscrito_2[indice_2];
+                indice_2++;
             }
             else {
-                clearInterval(intervalo);
+                clearInterval(intervalo_2);
                 enableButton(atq);
                 enableButton(vid);
             }
@@ -193,34 +201,34 @@ function masVida() {
         jugador.puntos_salud += 50;
         jugador.dinero -= 15;
         textoro.innerHTML = "Oro: " + jugador.dinero;
-        let texto = document.getElementById("text");
-        texto.innerText = "";
-        let textoEscrito = "Tu salud ha mejorado en 50 puntos";
-        let indice = 0;
-        const intervalo = setInterval(() => {
-            if (indice < textoEscrito.length) {
-                texto.textContent += textoEscrito[indice];
-                indice++;
+        var texto_3 = document.getElementById("text");
+        texto_3.innerText = "";
+        var textoEscrito_3 = "Tu salud ha mejorado en 50 puntos";
+        var indice_3 = 0;
+        var intervalo_3 = setInterval(function () {
+            if (indice_3 < textoEscrito_3.length) {
+                texto_3.textContent += textoEscrito_3[indice_3];
+                indice_3++;
             }
             else {
-                clearInterval(intervalo);
+                clearInterval(intervalo_3);
                 enableButton(vid);
                 enableButton(atq);
             }
         }, 40);
     }
     else {
-        let texto = document.getElementById("text");
-        texto.innerText = "";
-        let textoEscrito = "No tienes suficiente dinero, prueba a matar un par de bichos";
-        let indice = 0;
-        const intervalo = setInterval(() => {
-            if (indice < textoEscrito.length) {
-                texto.textContent += textoEscrito[indice];
-                indice++;
+        var texto_4 = document.getElementById("text");
+        texto_4.innerText = "";
+        var textoEscrito_4 = "No tienes suficiente dinero, prueba a matar un par de bichos";
+        var indice_4 = 0;
+        var intervalo_4 = setInterval(function () {
+            if (indice_4 < textoEscrito_4.length) {
+                texto_4.textContent += textoEscrito_4[indice_4];
+                indice_4++;
             }
             else {
-                clearInterval(intervalo);
+                clearInterval(intervalo_4);
                 enableButton(vid);
                 enableButton(atq);
             }
@@ -228,19 +236,13 @@ function masVida() {
     }
 }
 function mostrarEst(jugador) {
-    const textoElemento = document.getElementById("textes");
+    var textoElemento = document.getElementById("textes");
     if (textoElemento) {
-        textoElemento.innerHTML = `
-      <p><strong>Estadísticas del Jugador</strong></p>
-      <p>Nombre: ${jugador.nombre}</p>
-      <p>Vida: ${jugador.puntos_salud}</p>
-      <p>Ataque: ${jugador.puntos_ataque}</p>
-      <p>Dinero: ${jugador.dinero}</p>
-    `;
+        textoElemento.innerHTML = "\n      <p><strong>Estad\u00EDsticas del Jugador</strong></p>\n      <p>Nombre: ".concat(jugador.nombre, "</p>\n      <p>Vida: ").concat(jugador.puntos_salud, "</p>\n      <p>Ataque: ").concat(jugador.puntos_ataque, "</p>\n      <p>Dinero: ").concat(jugador.dinero, "</p>\n    ");
     }
 }
 function generarEnemigo() {
-    const enemigos = [
+    var enemigos = [
         "Caído",
         "Profano",
         "Espectro",
@@ -262,30 +264,30 @@ function generarEnemigo() {
         "Coloso",
         "Errante"
     ];
-    const nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
-    const enemigo = new Enemigo(nombreEnemigo, 100, 0, 0);
+    var nombreEnemigo = enemigos[Math.floor(Math.random() * enemigos.length)];
+    var enemigo = new Clases_js_2.Enemigo(nombreEnemigo, 100, 0, 0);
     enemigo.calcularFuerzaInicial();
     enemigo.soltarDinero();
     return enemigo;
 }
 //-------------------Ir A-------------------------
-export function irATienda() {
+function irATienda() {
     disableButton(tienda);
     disableButton(atq);
     disableButton(vid);
     enableButton(comb);
     enableButton(menu);
-    let estadisticas = document.getElementById("estadisticas");
-    let texto = document.getElementById("text");
-    setTimeout(() => {
+    var estadisticas = document.getElementById("estadisticas");
+    var texto = document.getElementById("text");
+    setTimeout(function () {
         fadeOutElement(estadisticas);
         fadeOutElement(imagen);
         fadeOutElement(streak);
         fadeOutElement(intercomb);
     }, 500);
-    const div = document.getElementById("canv");
+    var div = document.getElementById("canv");
     fadeOutBackground(div);
-    setTimeout(() => {
+    setTimeout(function () {
         div.style.backgroundImage = "url('img/tienda.gif')";
         div.style.backgroundSize = "cover";
         div.style.backgroundPosition = "bottom center";
@@ -293,9 +295,9 @@ export function irATienda() {
         fadeInBackground(div);
         fadeInElement(texto);
         texto.innerText = "";
-        let textoEscrito = "Bienvenido viajero. ¿Deseas mejorar tu vida o tu ataque a cambio de 15 Oro?";
-        let indice = 0;
-        const intervalo = setInterval(() => {
+        var textoEscrito = "Bienvenido viajero. ¿Deseas mejorar tu vida o tu ataque a cambio de 15 Oro?";
+        var indice = 0;
+        var intervalo = setInterval(function () {
             if (indice < textoEscrito.length) {
                 texto.textContent += textoEscrito[indice];
                 indice++;
@@ -307,27 +309,27 @@ export function irATienda() {
             }
         }, 40);
     }, 1000);
-    setTimeout(() => {
+    setTimeout(function () {
         fadeInElement(divva);
         fadeInElement(textoro);
     }, 3000);
 }
-export function irAMenu() {
+function irAMenu() {
     disableButton(menu);
     enableButton(comb);
     enableButton(tienda);
-    let estadisticas = document.getElementById("estadisticas");
-    let texto = document.getElementById("text");
-    setTimeout(() => {
+    var estadisticas = document.getElementById("estadisticas");
+    var texto = document.getElementById("text");
+    setTimeout(function () {
         fadeOutElement(texto);
         fadeOutElement(imagen);
         fadeOutElement(divva);
         fadeOutElement(intercomb);
         fadeOutElement(textoro);
     }, 600);
-    const div = document.getElementById("canv");
+    var div = document.getElementById("canv");
     fadeOutBackground(div);
-    setTimeout(() => {
+    setTimeout(function () {
         div.style.backgroundImage = "url('img/menu.gif')";
         div.style.backgroundSize = "cover";
         div.style.backgroundPosition = "bottom center";
@@ -337,16 +339,16 @@ export function irAMenu() {
         fadeInElement(streak);
     }, 1000);
 }
-export function irACombate() {
+function irACombate() {
     disableButton(comb);
     enableButton(tienda);
     enableButton(menu);
     fadeInElement(combate);
-    let estadisticas = document.getElementById("estadisticas");
-    const div = document.getElementById("canv");
-    let texto = document.getElementById("text");
+    var estadisticas = document.getElementById("estadisticas");
+    var div = document.getElementById("canv");
+    var texto = document.getElementById("text");
     enemigo1 = generarEnemigo();
-    setTimeout(() => {
+    setTimeout(function () {
         fadeOutElement(texto);
         fadeOutElement(estadisticas);
         fadeOutElement(divva);
@@ -354,15 +356,15 @@ export function irACombate() {
         fadeOutElement(streak);
     }, 500);
     fadeOutBackground(div);
-    setTimeout(() => {
-        let aleat = Math.floor(Math.random() * 3) + 1;
-        div.style.backgroundImage = `url('img/fondocombate${aleat}.gif')`;
+    setTimeout(function () {
+        var aleat = Math.floor(Math.random() * 3) + 1;
+        div.style.backgroundImage = "url('img/fondocombate".concat(aleat, ".gif')");
         div.style.backgroundSize = "cover";
         div.style.backgroundPosition = "bottom center";
         fadeInBackground(div);
-        setTimeout(() => {
-            let aleatene = Math.floor(Math.random() * 5) + 1;
-            imagen.src = `/img/Ene${aleatene}.gif`;
+        setTimeout(function () {
+            var aleatene = Math.floor(Math.random() * 5) + 1;
+            imagen.src = "/img/Ene".concat(aleatene, ".gif");
             fadeInElement(imagen);
             fadeInElement(intercomb);
             nombpp.innerHTML = jugador.nombre + " -- HP: " + jugador.puntos_salud + " -- Atk: " + jugador.puntos_ataque;
@@ -374,11 +376,11 @@ export function irACombate() {
 function salir() {
     fadeOutElement(centro);
     fadeOutElement(bot1);
-    setTimeout(() => {
+    setTimeout(function () {
         centro.style.display = "none";
         bot1.style.display = "none";
     }, 1000);
-    setTimeout(() => {
+    setTimeout(function () {
         window.location.reload();
     }, 2000);
 }
@@ -386,9 +388,9 @@ function salir() {
 function fadeOutElement(element) {
     if (!element || getComputedStyle(element).opacity === "0")
         return;
-    let opacity = 1;
-    const decrement = 0.12;
-    const interval = setInterval(() => {
+    var opacity = 1;
+    var decrement = 0.12;
+    var interval = setInterval(function () {
         if (opacity <= 0) {
             clearInterval(interval);
             element.style.opacity = "0";
@@ -402,10 +404,10 @@ function fadeOutElement(element) {
 function fadeInElement(element) {
     if (!element || getComputedStyle(element).opacity === "1")
         return;
-    let opacity = 0;
-    const increment = 0.12;
+    var opacity = 0;
+    var increment = 0.12;
     element.style.display = "";
-    const interval = setInterval(() => {
+    var interval = setInterval(function () {
         if (opacity >= 1) {
             clearInterval(interval);
             element.style.opacity = "1";
@@ -416,10 +418,10 @@ function fadeInElement(element) {
         }
     }, 100);
 }
-export function fadeOutBackground(element) {
+function fadeOutBackground(element) {
     var opacity = 1;
     var decrement = 0.12;
-    var interval = setInterval(() => {
+    var interval = setInterval(function () {
         if (opacity <= 0) {
             clearInterval(interval);
         }
@@ -427,11 +429,11 @@ export function fadeOutBackground(element) {
         opacity -= decrement;
     }, 100);
 }
-export function fadeInBackground(element) {
+function fadeInBackground(element) {
     var opacity = 0;
     var increment = 0.12;
     element.style.display = "";
-    var interval = setInterval(() => {
+    var interval = setInterval(function () {
         if (opacity >= 1) {
             clearInterval(interval);
         }
@@ -446,13 +448,13 @@ function enableButton(button) {
     button.disabled = false;
 }
 //-----------------DOM y eventos de click------------------------------
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     boton.addEventListener('click', crearJugador);
     tienda.addEventListener('click', irATienda);
     menu.addEventListener('click', irAMenu);
     comb.addEventListener('click', irACombate);
     vid.addEventListener('click', masVida);
     atq.addEventListener('click', masAtq);
-    combate.addEventListener('click', () => empezarComb(enemigo1));
+    combate.addEventListener('click', function () { return empezarComb(enemigo1); });
     botsalir.addEventListener('click', salir);
 });

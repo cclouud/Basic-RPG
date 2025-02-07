@@ -474,6 +474,10 @@ function salir(){
       centro.style.display = "none"
       bot1.style.display = "none"
     }, 1000);
+  
+    setTimeout(() =>{
+      window.location.reload()
+    }, 2000)
 }
 
 //-------------Funciones para animaciones---------------------
