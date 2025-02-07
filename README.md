@@ -2,5 +2,5 @@
 
 A basic Typescript videogame that i made for school using Html, CSS and Typescript. Its not responsive so take care
 
-You can also visit [my web](basicrpg.cclouud.dev)
+You can also visit [my web](https://basicrpg.cclouud.dev/)
  to see it online.(Dont forget to resize)
